@@ -70,5 +70,7 @@ searchbar.addEventListener("keyup", (event) => { // El escuchador Keyup es para 
 
 function arrayfiltered() {
     let data = []
-    if (checkboxSelected.length > 0 && target.cheked)
+    if (checkboxSelected.length > 0 && searchText !== "") {
+        checkboxSelected.map()
+    }
 }
