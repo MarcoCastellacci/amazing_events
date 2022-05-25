@@ -126,25 +126,48 @@ h2 {
     height: 70vh;
 }
 
+.card-body {
+    padding: 0 !important;
+}
+
+.eventos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.not-found {
+    color: #db0269;
+}
+
 .card img {
     width: 100%;
     max-height: 35%;
 }
 
-.card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-content: center;
+.boton-detail {
+    background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+    margin: .5rem;
+    color: white;
 }
 
 .card-text {
-    width: 80%;
+    margin-top: .5rem;
+    margin-bottom: 0;
+    text-align: center;
+    font-size: small;
 }
 
 .card-title {
+    width: 100%;
     font-style: oblique;
     font-weight: bold;
+    font-size: 1.5rem;
+    margin: .5rem;
+    text-align: center;
+    padding-top: 0 !important;
 }
 
 .fecha {
@@ -152,6 +175,8 @@ h2 {
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: large;
+    margin: 1rem;
+    justify-self: flex-end;
 }
 
 
@@ -199,8 +224,21 @@ h2 {
     width: 50%;
 }
 
+.detalles-li {
+    font-size: 1.2rem;
+    text-align: left;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.title {
+    font-size: 2rem !important;
+    font-weight: bold;
+    font-style: oblique;
+}
+
 .descripcion img {
     width: 100%;
+    height: 30%;
 }
 
 .descripcion h5 {
@@ -251,29 +289,42 @@ td {
 }
 
 
-/* Animaciones */
-
-
-/* @keyframes header {
-    0% {
-        background-color: rgb(123, 167, 201);
-    }
-    25% {
-        background-color: rgb(112, 174, 221);
-    }
-    50% {
-        background-color: rgb(62, 142, 207);
-    }
-    75% {
-        background-color: rgb(112, 174, 221);
-    }
-    100% {
-        background-color: rgb(123, 167, 201);
-    }
-} */
-
-
 /* MediaQuery */
+
+@media (max-width: 1350px) {
+    .card {
+        width: 30%;
+        height: 100vh;
+    }
+    .card img {
+        width: 100%;
+        height: 50%;
+    }
+    .detalles-li {
+        font-size: 1.3rem !important;
+        text-align: left;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .title {
+        font-size: 2rem !important;
+        font-weight: bold;
+        font-style: oblique;
+    }
+    .card-title {
+        font-size: 1.5rem;
+        font-style: oblique;
+    }
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        height: 50% !important;
+    }
+    .card-text {
+        width: 100% !important;
+        height: 50%;
+        font-size: .6rem;
+    }
+}
 
 @media (max-width: 1120px) {
     .filtros {
@@ -283,15 +334,24 @@ td {
         margin: 0;
     }
     .detail {
-        flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        justify-content: center;
         height: 100%;
+        width: 100vw;
+    }
+    .descripcion {
+        width: 50%;
+    }
+    .descripcion img {
+        width: 100%;
+    }
+    .texto {
+        height: 50%;
     }
     .card-text {
         width: 100%;
-        font-size: small;
+        height: 50%;
+        font-size: 1rem;
     }
     .main-detail {
         height: 100%;
@@ -317,9 +377,6 @@ td {
         font-size: 2.1rem;
         font-style: oblique;
     }
-    .card-text {
-        font-size: 1.5rem;
-    }
 }
 
 @media (max-width: 760px) {
@@ -336,14 +393,16 @@ td {
         height: 100vh;
     }
     .descripcion img {
-        width: 90%;
+        width: 100%;
     }
     .card-title {
         font-size: 2.1rem;
         font-style: oblique;
     }
     .card-text {
-        font-size: 1.5rem;
+        width: 100%;
+        height: 50%;
+        font-size: 1rem;
     }
 }
 
@@ -398,7 +457,12 @@ td {
         font-size: 2.1rem;
         font-style: oblique;
     }
+    .navegador {
+        margin-right: 0 !important;
+    }
     .card-text {
-        font-size: 1.5rem;
+        width: 100%;
+        height: 50%;
+        font-size: 1rem;
     }
 }
