@@ -9,7 +9,8 @@ let searchText = "";
 let dataArray = [];
 let eventosPasados = data.eventos.filter(pastEvents => pastEvents.date < currenDate)
 let eventosFuturos = data.eventos.filter(UpEvents => UpEvents.date > currenDate)
-
+var id = 1
+data.eventos.map(detail => detail.id = id++)
 
 function crearChecks() {
     let checkboxes = document.getElementById(`checkbox`); // Llamamos al Id del Html
@@ -21,8 +22,6 @@ function crearChecks() {
         checkHtml += `<label><input type="checkbox" value="${check}">${check}</label>`
     })
     checkboxes.innerHTML = checkHtml // Imprimimos el template armado
-    var id = 1
-    data.eventos.map(detail => detail.id = id++)
 }
 crearChecks() // Llamamo a la funcion que crea los checkbox
 
@@ -65,70 +64,33 @@ searchbar.addEventListener("keyup", (event) => { // El escuchador Keyup es para 
     arrayFiltered()
 })
 
+function filtrado(array) {
+    dataArray = []
+    if (checkboxSelected.length > 0 && searchText !== "") {
+        checkboxSelected.map(events => {
+            dataArray.push(...array.filter(show => show.name.toLowerCase().includes(searchText.trim().toLowerCase()) && show.category === events)) //De esta forma estamos combinando los filtrados por checkbox y barra de buscado
+        })
+    } else if (checkboxSelected.length > 0 && searchText === "") {
+        checkboxSelected.map(events => dataArray.push(...array.filter(show => show.category == events)))
+    } else if (checkboxSelected.length === 0 && searchText !== "") {
+        dataArray.push(...array.filter(show => show.name.toLowerCase().includes(searchText.trim().toLowerCase()) || show.description.toLowerCase().includes(searchText.trim().toLowerCase())))
+        console.log(arrayEventos)
+    } else {
+        dataArray.push(...array)
+        console.log(dataArray);
+    }
+}
 var arrayEventos = "";
 
 function arrayFiltered() {
-    switch (arrayEventos) {
-        case 1:
-            dataArray = []
-            if (checkboxSelected.length > 0 && searchText !== "") {
-                checkboxSelected.map(events => {
-                    dataArray.push(...eventosPasados.filter(show => show.name.toLowerCase().includes(searchText.trim().toLowerCase()) && show.category === events)) //De esta forma estamos combinando los filtrados por checkbox y barra de buscado
-                })
-            } else if (checkboxSelected.length > 0 && searchText === "") {
-                checkboxSelected.map(events => dataArray.push(...eventosPasados.filter(show => show.category == events)))
-            } else if (checkboxSelected.length === 0 && searchText !== "") {
-                dataArray.push(...eventosPasados.filter(show => show.name.toLowerCase().includes(searchText.trim().toLowerCase()) || show.description.toLowerCase().includes(searchText.trim().toLowerCase())))
-                console.log(arrayEventos)
-            } else {
-                dataArray.push(...eventosPasados)
-                console.log(dataArray);
-            }
-            break;
-        case 2:
-            dataArray = []
-            if (checkboxSelected.length > 0 && searchText !== "") {
-                checkboxSelected.map(events => {
-                    dataArray.push(...eventosFuturos.filter(show => show.name.toLowerCase().includes(searchText.trim().toLowerCase()) && show.category === events)) //De esta forma estamos combinando los filtrados por checkbox y barra de buscado
-                })
-            } else if (checkboxSelected.length > 0 && searchText === "") {
-                checkboxSelected.map(events => dataArray.push(...eventosFuturos.filter(show => show.category == events)))
-            } else if (checkboxSelected.length === 0 && searchText !== "") {
-                dataArray.push(...eventosFuturos.filter(show => show.name.toLowerCase().includes(searchText.trim().toLowerCase()) || show.description.toLowerCase().includes(searchText.trim().toLowerCase())))
-                console.log(arrayEventos);
-            } else {
-                dataArray.push(...eventosFuturos)
-                console.log(dataArray);
-            }
-            break;
-        case 3:
-            dataArray = []
-            if (checkboxSelected.length > 0 && searchText !== "") {
-                checkboxSelected.map(events => {
-                    dataArray.push(...data.eventos.filter(show => show.name.toLowerCase().includes(searchText.trim().toLowerCase()) && show.category === events)) //De esta forma estamos combinando los filtrados por checkbox y barra de buscado
-                })
-            } else if (checkboxSelected.length > 0 && searchText === "") {
-                checkboxSelected.map(events => dataArray.push(...data.eventos.filter(show => show.category == events)))
-            } else if (checkboxSelected.length === 0 && searchText !== "") {
-                dataArray.push(...data.eventos.filter(show => show.name.toLowerCase().includes(searchText.trim().toLowerCase()) || show.description.toLowerCase().includes(searchText.trim().toLowerCase())))
-                console.log(arrayEventos);
-            } else {
-                dataArray.push(...data.eventos)
-                console.log(dataArray);
-            }
-            break;
-        default:
-            console.log(dataArray);
-            break;
-    }
     if (events != null) {
-        arrayEventos = 3 // Home
+        filtrado(data.eventos)
         paintCards(dataArray, events)
     } else if (eventsPast != null) {
-        arrayEventos = 1 // Eventos Pasados
+        filtrado(eventosPasados)
         paintCards(dataArray, eventsPast)
     } else if (eventsUP != null) {
-        arrayEventos = 2 // Eventos Futuros
+        filtrado(eventosFuturos)
         paintCards(dataArray, eventsUP)
     }
 }
