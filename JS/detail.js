@@ -1,17 +1,24 @@
-let arrayData = data.eventos
-console.log(arrayData);
+let amazingEvents = []
 
-function getDetail() {
-    var id = 1
-    arrayData.map(detail => detail.id = id++)
-    var id = location.search.split("?=").filter(Number)
-    console.log(id);
-    var idSelected = Number(id[0])
-    let showDetail = arrayData.find((detalle) => {
-        return detalle.id == idSelected
-    })
-    console.log(showDetail);
-    var templateDetail = `
+async function getData() {
+    await fetch("https://amazing-events.herokuapp.com/api/events")
+        .then(response => response.json())
+        .then(JSON => amazingEvents = JSON)
+
+    console.log(amazingEvents);
+    const amazing = amazingEvents.events
+
+    function getDetail() {
+        var id = 1
+        amazing.map(detail => detail.id = id++)
+        var id = location.search.split("?=").filter(Number)
+        console.log(id);
+        var idSelected = Number(id[0])
+        let showDetail = amazing.find((detalle) => {
+            return detalle.id == idSelected
+        })
+        console.log(showDetail);
+        var templateDetail = `
     <div class="descripcion align-self-center justify-self-center">
                 <img src="${showDetail.image}" alt="cine">
             </div>
@@ -28,6 +35,9 @@ function getDetail() {
             </div>
     `
 
-    document.getElementById("detail").innerHTML = templateDetail
+        document.getElementById("detail").innerHTML = templateDetail
+    }
+    getDetail()
+
 }
-getDetail()
+getData()
