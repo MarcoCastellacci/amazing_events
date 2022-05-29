@@ -285,6 +285,10 @@ td {
     padding: 1rem;
 }
 
+.percent {
+    text-align: center;
+}
+
 .subtitulo-tabla {
     font-size: 1rem;
 }
