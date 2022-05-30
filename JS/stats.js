@@ -12,7 +12,7 @@ async function getData() {
     let table = document.getElementById("stats")
     let eventosPasados = amazing.filter(pastEvents => pastEvents.date < fechaActual)
     let eventosFuturos = amazing.filter(futureEvents => futureEvents.date > fechaActual)
-
+    console.log(eventosFuturos);
 
     function arrayStats() {
         let arrayAttendance = amazing.map(evento => {
@@ -62,6 +62,7 @@ async function getData() {
     categoryPast = filterCategories(eventosPasados)
         // Filtramos las categorias de los eventos
 
+
     function filterCategories(array) {
         let categorysFiltered = array.map(evento => evento.category)
         return [...new Set(categorysFiltered)]
@@ -70,6 +71,7 @@ async function getData() {
     let upComingStats = calculateStats(categoryFuture, eventosFuturos)
     let pastStats = calculateStats(categoryPast, eventosPasados)
 
+    console.log(upComingStats);
 
     function calculateStats(arraycategories, arrayeventos) {
         let categoryStats = []
@@ -111,7 +113,7 @@ async function getData() {
         array.forEach(evento => {
             contenedorTarjetas.innerHTML += `<tr>
             <td> ${evento.category}</td> 
-            <td class="percent"> ${evento.revenue.toFixed(2)}</td> 
+            <td class="percent"> $${evento.revenue.toFixed(2)}</td> 
             <td class="percent"> ${evento.attendance.toFixed(2)} %</td>   
             </tr> `
         })

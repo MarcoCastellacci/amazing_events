@@ -262,6 +262,14 @@ input[type="text"] {
     width: 100%;
 }
 
+input[type="submit"] {
+    background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+    color: #db0269;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
 
 /* Stats */
 
