@@ -1,7 +1,7 @@
 let amazingEvents = []
 
 async function getData() {
-    await fetch("https://amazing-events.herokuapp.com/api/events")
+    await fetch("https://mindhub-xj03.onrender.com/api/amazing")
         .then(response => response.json())
         .then(JSON => amazingEvents = JSON)
 
@@ -23,8 +23,8 @@ async function getData() {
     function crearChecks() {
         let checkboxes = document.getElementById(`checkbox`); // Llamamos al Id del Html
         let checkboxFilter = amazing.map(checks => { return checks.category }); // Con este .map recorremos el array original filtramos por "category" y con "new Set" eliminamos los repetidos 
-        const arrayChecks = new Set(checkboxFilter);
-        let checkboxs = [...arrayChecks]
+        const Checks = new Set(checkboxFilter);
+        let checkboxs = [...Checks]
         let checkHtml = ""
         checkboxs.forEach(check => {
             checkHtml += `<label><input type="checkbox" value="${check}">${check}</label>`
@@ -58,7 +58,7 @@ async function getData() {
     var checkbox = document.querySelectorAll("input[type=checkbox]")
         // Seleccionamos todos los checkbox dentro de un Input
     checkbox.forEach(check => check.addEventListener("click", (event) => {
-        var cheked = event.target.checked
+        let cheked = event.target.checked
         if (cheked) { //Condicional sobre un atributo validatorio
             checkboxSelected.push(event.target.value) //Guardamos en una variable el true
         } else {
@@ -86,7 +86,6 @@ async function getData() {
         } else {
             dataArray.push(...array)
         }
-        console.log(dataArray);
     }
 
     var arrayEventos = "";
